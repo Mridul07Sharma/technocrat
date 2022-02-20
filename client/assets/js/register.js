@@ -4,7 +4,7 @@ const profession = document.querySelector("#profession-input");
 const gender = document.querySelector("#gender-input");
 const experience = document.querySelector("#experience-input");
 const registerBtn = document.querySelector("#register-button");
-const employee_fields = document.querySelectorAll(".onlyforemployee");
+const pf = document.querySelector('.onlyforemployee');
 const errorDiv = document.querySelector("#loginerror");
 
 const verifyToken = (token) => {
@@ -43,29 +43,25 @@ verifyToken(token);
 
 skill.onchange = () => {
     if (skill.value == "employee") {
-        employee_fields.forEach(field => {
-            field.classList.remove("no-display");
-            field.children[1].setAttribute("required", "");
-        })
+        pf.classList.remove("no-display");
+        document.querySelector('#profession-input').setAttribute("required", "");
     } else {
-        employee_fields.forEach(field => {
-            field.classList.add("no-display");
-            field.children[1].removeAttribute("required");
-        })
+        pf.classList.add("no-display");
+        document.querySelector('#profession-input').removeAttribute("required");
     }
 };
 document.querySelector("form").onsubmit = (e) => {
     e.preventDefault();
-    if (inputs[5].value === inputs[6].value) {
-        if (inputs[5].value.length < 8) {
+    if (inputs[4].value === inputs[5].value) {
+        if (inputs[4].value.length < 8) {
             errorDiv.innerHTML = "Password must be of at least 8 letters.";
+            inputs[4].value = "";
             inputs[5].value = "";
-            inputs[6].value = "";
         } else if (inputs[2].value.length !== 10) {
             errorDiv.innerHTML = "Please enter correct phone number without country code.";
             inputs[2].value = "";
+            inputs[4].value = "";
             inputs[5].value = "";
-            inputs[6].value = "";
         } else {
             errorDiv.innerHTML = "";
             const userData = {
@@ -75,18 +71,10 @@ document.querySelector("form").onsubmit = (e) => {
                 phone: Number(inputs[2].value),
                 gender: gender.value,
                 address: inputs[3].value,
-                password: inputs[5].value
+                password: inputs[4].value
             }
             if (skill.value === "employee") {
                 userData.profession = profession.value;
-                userData.qualification = inputs[4].value;
-                if (experience === "0") {
-                    userData.experience = "Less than 1 year";
-                } else if (experience === "1") {
-                    userData.experience = "1-5 years";
-                } else {
-                    userData.experience = "5+ years";
-                }
             }
             const url = 'http://localhost:3000/signup';
             const options = {
@@ -111,7 +99,23 @@ document.querySelector("form").onsubmit = (e) => {
         }
     } else {
         errorDiv.innerHTML = "Password do not match ! Please enter again";
+        inputs[4].value = "";
         inputs[5].value = "";
-        inputs[6].value = "";
+    }
+}
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (event.keyCode == 123) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
     }
 }

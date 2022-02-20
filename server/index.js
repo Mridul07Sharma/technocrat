@@ -63,7 +63,6 @@ io.on('connection', (socket) => {
         });
         job.save()
             .then(result => {
-                console.log(result);
                 socket.emit('jobPosted', {
                     status: "success",
                     job: job
@@ -91,7 +90,7 @@ io.on('connection', (socket) => {
                     to: job[0].email,
                     subject: `JOB UPDATE : ${job[0].description}`,
                     text: `The following employee has applied for your job. Visit his profile by follwoing link :
-
+                    file:///E:/technocrat/client/profile.html?id=${job[0].job}&type=employee
                     `
                 };
                 mailTransporter.sendMail(mailDetails, function(err, data) {

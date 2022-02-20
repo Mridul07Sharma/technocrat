@@ -30,10 +30,6 @@ const employeeSchema = new mongoose.Schema({
     gender: String,
     address: String,
     profession: String,
-    qualification: String,
-    experience: String,
-    rating: Number,
-    jobs: Number,
     password: String,
     OTP: Number
 });
@@ -44,8 +40,6 @@ const employerSchema = new mongoose.Schema({
     phone: Number,
     gender: String,
     address: String,
-    rating: Number,
-    jobs: Number,
     password: String,
     OTP: Number
 });
@@ -87,10 +81,6 @@ app.post('/signup', (req, res) => {
                                 gender: req.body.gender,
                                 address: req.body.address,
                                 profession: req.body.profession,
-                                qualification: req.body.qualification,
-                                experience: req.body.experience,
-                                rating: 0,
-                                jobs: 7,
                                 password: hash
                             })
                             employee.save()
@@ -129,8 +119,6 @@ app.post('/signup', (req, res) => {
                                 phone: req.body.phone,
                                 gender: req.body.gender,
                                 address: req.body.address,
-                                rating: 0,
-                                jobs: 0,
                                 password: hash
                             })
                             employer.save()
@@ -304,7 +292,7 @@ app.post('/getUserData', (req, res) => {
 })
 
 app.get('/getTopEmployees', (req, res) => {
-    Employee.find().sort({ jobs: -1 }).limit(10)
+    Employee.find().limit(10)
         .exec()
         .then(employees => {
             res.status(200).send(employees);

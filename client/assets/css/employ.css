@@ -709,15 +709,6 @@ body {
     }
 }
 
-#home {
-    background-color: black;
-    background: url("../images/Sofweb-services.png");
-    min-height: 100vh;
-    background-position: center;
-    background-size: cover;
-    color: #ffffff;
-}
-
 #home #cover {
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;

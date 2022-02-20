@@ -8,7 +8,6 @@
     font-family: 'Baloo Bhai 2', cursive;
 }
 
-
 html[xmlns] .clearfix {
     display: block;
 }
@@ -263,12 +262,12 @@ body {
     padding-left: 40px;
 }
 
-.header-area .main-nav .nav li:last-child a{
+.header-area .main-nav .nav li:last-child a {
     padding: 0px 20px;
     font-weight: 400;
 }
 
-.header-area .main-nav .nav li:last-child a:hover{
+.header-area .main-nav .nav li:last-child a:hover {
     color: #4771cb !important;
 }
 
@@ -307,7 +306,6 @@ body {
     right: 18px;
     top: 12px;
 }
-
 
 .header-area .main-nav .nav li.submenu ul {
     position: absolute;
@@ -407,7 +405,6 @@ body {
     width: 75%;
 }
 
-
 .header-area .main-nav .menu-trigger span:before,
 .header-area .main-nav .menu-trigger span:after {
     content: "";
@@ -457,7 +454,6 @@ body {
     background-color: #fff;
 }
 
-
 .header-area.header-sticky {
     min-height: 80px;
 }
@@ -484,7 +480,7 @@ body {
     .main-blue-button a {
         border-radius: 0;
     }
-    .header-area .main-nav .nav li:nth-child(6){
+    .header-area .main-nav .nav li:nth-child(6) {
         padding-right: 0px;
     }
 }
@@ -805,6 +801,7 @@ main {
     background: #33ccc5;
     box-shadow: none;
 }
+
 .profile-button2 {
     background: #e70d0d;
     box-shadow: none;
@@ -864,7 +861,9 @@ main {
     font-weight: 600;
 }
 
-
+.no-display {
+    display: none;
+}
 
 #myInput {
     background-image: url('https://www.w3schools.com/css/searchicon.png');
@@ -898,7 +897,6 @@ main {
     background-color: #eee;
 }
 
-
 .description {
     font-size: 1.2em;
 }
@@ -916,4 +914,17 @@ main {
     font-family: 'Playfair Display', serif;
     font-size: 2.6em;
     font-weight: 900;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Firefox */
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

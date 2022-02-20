@@ -50,15 +50,15 @@ const changePage = () => {
 }
 
 socket.on('listedJobs', jobList => {
+    console.log(jobList);
     jobList.forEach(job => {
         myUL.innerHTML += `
         <li id="gud" class="col-12 col-md-6">
-            <a id="bad">
                 <div class="row px-3">
-                    <div class="col-6 grey mb-4" style="text-align: left">
+                    <div class="col-4 grey mb-4" style="text-align: left">
                         ${job.name}
                     </div>
-                    <div class="col-6 grey mb-4" style="text-align: right">
+                    <div class="col-8 grey mb-4" style="text-align: right">
                         ${job.email}
                     </div>
                     <div class="col-12 grey mb-3">
@@ -76,7 +76,6 @@ socket.on('listedJobs', jobList => {
                         <button onclick=(applyJob('${job._id}')) class="btn btn-primary profile-button" type="button">Apply</button>
                     </div>
                 </div>
-            </a>
         </li>
         <br>`;
     })
@@ -101,6 +100,12 @@ socket.on('newJobPosted', job => {
         <li id="gud" class="col-12 col-md-6">
             <a id="bad" href="#">
                 <div class="row px-3">
+                    <div class="col-4 grey mb-4" style="text-align: left">
+                        ${job.name}
+                    </div>
+                    <div class="col-8 grey mb-4" style="text-align: right">
+                        ${job.email}
+                    </div>
                     <div class="col-12 grey mb-3">
                         <h3><b>Need an ${job.profession}</b></h3>
                     </div>
@@ -129,4 +134,19 @@ document.querySelector('#log_out_btn').onclick = () => {
 
 document.querySelector('#hrsdbj').onclick = () => {
     window.location.replace(`./profile.html?id=${userData._id}&type=employee`);
+}
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (event.keyCode == 123) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
 }

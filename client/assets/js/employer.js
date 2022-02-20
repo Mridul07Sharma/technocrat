@@ -58,9 +58,6 @@ const addEmployees = (emps) => {
                     <div class="col-12 grey">
                         <b> Proffesion : </b> ${emp.profession}
                     </div>
-                    <div class="col-12 grey">
-                        <b> Jobs : </b> ${emp.jobs}
-                    </div>
                     <div class="col-12 grey mb-3">
                         <b> Address : </b> ${emp.address}
                     </div>
@@ -129,15 +126,14 @@ const printJob = (job) => {
             <li id="gud" class=" col-12 col-md-6 mb-5" data-id=${job._id}>
                 <a id="bad" href="#">
                     <div class="row px-3">
-                        <div class="col-6 grey mb-4" style="text-align: left">
+                        <div class="col-4 grey mb-4" style="text-align: left">
                             ${job.name}
                         </div>
-                        <div class="col-6 grey mb-4" style="text-align: right">
+                        <div class="col-8 grey mb-4" style="text-align: right">
                             ${job.email}
                         </div>
                         <div class="col-12 grey">
-                            <h3>Need an ${job.profession}</h3>
-                            &#8377; 300 / hr
+                            <h3>Need an ${job.profession}</h3>\
                         </div>
                         <div class="col-12 grey my-4">
                             ${job.description}
@@ -182,4 +178,20 @@ document.querySelector('#log_out_btn').onclick = () => {
 
 document.querySelector('#hrsdbj').onclick = () => {
     window.location.replace(`./profile.html?id=${userData._id}&type=employer`);
+}
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (event.keyCode == 123) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
 }

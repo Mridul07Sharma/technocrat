@@ -1,12 +1,10 @@
 let userData = JSON.parse(sessionStorage.getItem('technocratUserData'));
-if (userData === null) {
-    localStorage.removeItem('413F4428472B4B6250655367566B5970337336763979244226452948404D6351');
-    sessionStorage.removeItem('technocratUserData');
-    window.location.href = "./login.html";
+let email;
+if (userData !== null) {
+    email = userData.email;
+    if (userData.userType === 'employee') document.querySelector('.findjobbutton a').innerHTML = 'Find Job';
+    else document.querySelector('.findjobbutton a').innerHTML = 'Find Talent';
 }
-let email = userData.email;
-if (userData.userType === 'employee') document.querySelector('.findjobbutton a').innerHTML = 'Find Job';
-else document.querySelector('.findjobbutton a').innerHTML = 'Find Talent';
 
 document.querySelector('.findjobbutton').onclick = () => {
     window.location.href = './login.html';
@@ -19,7 +17,6 @@ let type = params.get('type');
 if (type === 'employer') {
     document.querySelector('#xxProfession').style.display = 'none';
 }
-
 const url = 'http://localhost:3000/getProfile';
 const options = {
     method: 'post',
@@ -40,15 +37,33 @@ fetch(url, options)
                     window.location.href = "./login.html";
                 } else {
                     result = result[0];
+                    console.log(result);
                     document.querySelector('#empName').innerHTML = result.name;
                     document.querySelectorAll('.xxName').forEach(el => el.innerHTML = result.name);
                     document.querySelectorAll('.xxAddress').forEach(el => el.innerHTML = result.address);
                     document.querySelector('#xxNum').innerHTML = result.phone;
                     document.querySelector('#xxMail').innerHTML = result.email;
-                    document.querySelector('#xxRate').innerHTML = result.rating;
+                    document.querySelector('#xxProfession').innerHTML = result.profession;
+
                 }
             })
     })
     .catch((error) => {
         return false;
     });
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (event.keyCode == 123) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
+}
