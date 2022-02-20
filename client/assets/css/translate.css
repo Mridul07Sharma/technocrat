@@ -8,7 +8,7 @@
 
 .goog-te-gadget-simple{
     background-color:transparent!important;
-    background:url("google-translate.png") center / 12px no-repeat;
+    background:url("../media/google-translate.png") center / 12px no-repeat;
     -webkit-transition:all .2s ease;
     transition:all .2s ease;
     background-size: 20px 20px;
