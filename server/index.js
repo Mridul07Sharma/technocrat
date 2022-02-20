@@ -11,6 +11,15 @@ const io = require("socket.io")(server, {
         methods: ["GET", "POST"]
     }
 });
+const nodemailer = require('nodemailer');
+
+let mailTransporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.mail,
+        pass: process.env.password
+    }
+});
 
 const jobSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -23,21 +32,16 @@ const jobSchema = new mongoose.Schema({
 const Job = mongoose.model('Job', jobSchema);
 
 io.on('connection', (socket) => {
-    let roomCode, user;
+    let user;
     socket.on("loggedIn", (userData) => {
-            user = userData;
-            userType = userData.userType;
-            if (userType === 'employee') {
-                Job.find({ "profession": userData.profession }, (err, data) => {
-                    socket.emit('listedJobs', (data));
-                })
-            }
-        })
-        // socket.on({ "profession": user.profession }, () => {
-        //     Job.find((err, data) => {
-        //         socket.emit('listedJobs', (data));
-        //     })
-        // })
+        user = userData;
+        userType = userData.userType;
+        if (userType === 'employee') {
+            Job.find({ "profession": userData.profession }, (err, data) => {
+                socket.emit('listedJobs', (data));
+            })
+        }
+    })
     socket.on('getMyJobs', email => {
         Job.find({ email: email })
             .exec()
@@ -69,15 +73,35 @@ io.on('connection', (socket) => {
             .catch(err => {
                 socket.emit('jobPosted', ('error'));
             })
-            // io.emit('refresh');
     });
     socket.on('deleteJob', (jobId) => {
         Job.findOneAndDelete({ _id: jobId }, (err, data) => {
             if (err) console.log('error');
             else {
-                socket.emit('refresh');
+                io.emit('refresh');
             }
         })
+    })
+    socket.on('applyJob', (data) => {
+        Job.find({ _id: data.job })
+            .exec()
+            .then(job => {
+                let mailDetails = {
+                    from: process.env.mail,
+                    to: job[0].email,
+                    subject: `JOB UPDATE : ${job[0].description}`,
+                    text: `The following employee has applied for your job. Visit his profile by follwoing link :
+
+                    `
+                };
+                mailTransporter.sendMail(mailDetails, function(err, data) {
+                    if (err) {
+                        socket.emit('jobApplied', 'n');
+                    } else {
+                        socket.emit('jobApplied', 'y');
+                    }
+                });
+            })
     })
 });
 

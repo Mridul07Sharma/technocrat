@@ -5,7 +5,16 @@ const cors = require('cors');
 require('dotenv').config()
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 const CONNECTION_URL = process.env.DB;
+
+let mailTransporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.mail,
+        pass: process.env.password
+    }
+});
 
 const app = express();
 app.use(cors());
@@ -25,7 +34,8 @@ const employeeSchema = new mongoose.Schema({
     experience: String,
     rating: Number,
     jobs: Number,
-    password: String
+    password: String,
+    OTP: Number
 });
 const employerSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -36,7 +46,8 @@ const employerSchema = new mongoose.Schema({
     address: String,
     rating: Number,
     jobs: Number,
-    password: String
+    password: String,
+    OTP: Number
 });
 const Employee = mongoose.model('Employee', employeeSchema);
 const Employer = mongoose.model('Employer', employerSchema);
@@ -46,10 +57,12 @@ const verifyLogin = (token, res) => {
         if (err) res.status(200).json({
             reply: 'n'
         });
-        res.status(200).json({
-            reply: 'y',
-            userData: loginData
-        });
+        else {
+            res.status(200).json({
+                reply: 'y',
+                userData: loginData
+            });
+        }
     });
 }
 
@@ -322,6 +335,127 @@ app.post('/getProfile', (req, res) => {
                 return res.status(200).send('n');
             })
     }
+})
+app.post('/resetPasswordCode', (req, res) => {
+    let pin = Math.floor(100000 + Math.random() * 900000);
+    if (req.body.userType == "employee") {
+        Employee.findOneAndUpdate({ email: req.body.email }, { OTP: pin }, { returnOriginal: false })
+            .exec()
+            .then(emp => {
+                if (emp === null) res.status(200).json({
+                    reply: 'n'
+                })
+                else {
+                    let mailDetails = {
+                        from: process.env.mail,
+                        to: req.body.email,
+                        subject: 'ES-Crew Reset Password !',
+                        text: `Your Verification Code is : ${pin}`
+                    };
+                    mailTransporter.sendMail(mailDetails, function(err, data) {
+                        if (err) {
+                            res.status(200).json({
+                                reply: 'n'
+                            })
+                        } else {
+                            res.status(200).json({
+                                reply: 'y'
+                            });
+                        }
+                    });
+
+                }
+            })
+            .catch(err => {
+                return res.status(200).json({
+                    reply: 'n',
+                    msg: 'Internal Error !! Try again later'
+                })
+            })
+    } else {
+        Employer.findOneAndUpdate({ email: req.body.email }, { OTP: pin }, { returnOriginal: false })
+            .exec()
+            .then(emp => {
+                if (emp === null) res.status(200).send('n');
+                else {
+                    res.status(200).json({
+                        reply: 'y'
+                    });
+                }
+            })
+            .catch(err => {
+                return res.status(200).json({
+                    reply: 'n',
+                    msg: 'Internal Error !! Try again later'
+                })
+            })
+    }
+});
+
+app.post('/verifyOTP', (req, res) => {
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
+        if (err) {
+            return res.status(200).json({
+                reply: 'n',
+                msg: 'Internal Error !! Try again later'
+            })
+        } else {
+            if (req.body.type === 'employee') {
+                Employee.find({ email: req.body.email })
+                    .exec()
+                    .then(emp => {
+                        if (req.body.OTP == emp[0].OTP) {
+                            Employee.findOneAndUpdate({ email: req.body.email }, { password: hash }, { returnOriginal: false })
+                                .exec()
+                                .then(empl => {
+                                    console.log(empl);
+                                    if (empl[0] === null) res.status(200).send('n');
+                                    else {
+                                        res.status(200).json({
+                                            reply: 'y'
+                                        });
+                                    }
+                                })
+                                .catch(err => {
+                                    return res.status(200).json({
+                                        reply: 'n',
+                                        msg: 'Internal Error !! Try again later'
+                                    })
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        return res.status(200).send('n');
+                    })
+            } else {
+                Employer.find({ email: req.body.email })
+                    .exec()
+                    .then(emp => {
+                        if (req.body.OTP == emp[0].OTP) {
+                            Employer.findOneAndUpdate({ email: req.body.email }, { password: hash }, { returnOriginal: false })
+                                .exec()
+                                .then(empl => {
+                                    if (empl[0] === null) res.status(200).send('n');
+                                    else {
+                                        res.status(200).json({
+                                            reply: 'y'
+                                        });
+                                    }
+                                })
+                                .catch(err => {
+                                    return res.status(200).json({
+                                        reply: 'n',
+                                        msg: 'Internal Error !! Try again later'
+                                    })
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        return res.status(200).send('n');
+                    })
+            }
+        }
+    })
 })
 
 

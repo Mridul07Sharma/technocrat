@@ -40,7 +40,6 @@ fetch(url, options)
                     window.location.href = "./login.html";
                 } else {
                     result = result[0];
-                    console.log(result);
                     document.querySelector('#empName').innerHTML = result.name;
                     document.querySelectorAll('.xxName').forEach(el => el.innerHTML = result.name);
                     document.querySelectorAll('.xxAddress').forEach(el => el.innerHTML = result.address);

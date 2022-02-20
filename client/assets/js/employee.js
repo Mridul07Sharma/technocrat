@@ -53,8 +53,14 @@ socket.on('listedJobs', jobList => {
     jobList.forEach(job => {
         myUL.innerHTML += `
         <li id="gud" class="col-12 col-md-6">
-            <a id="bad" href="#">
+            <a id="bad">
                 <div class="row px-3">
+                    <div class="col-6 grey mb-4" style="text-align: left">
+                        ${job.name}
+                    </div>
+                    <div class="col-6 grey mb-4" style="text-align: right">
+                        ${job.email}
+                    </div>
                     <div class="col-12 grey mb-3">
                         <h3><b>Need an ${job.profession}</b></h3>
                     </div>
@@ -67,7 +73,7 @@ socket.on('listedJobs', jobList => {
                         ${job.address}
                     </div>
                     <div class="col-12grey">
-                        <button class="btn btn-primary profile-button" type="button">Apply</button>
+                        <button onclick=(applyJob('${job._id}')) class="btn btn-primary profile-button" type="button">Apply</button>
                     </div>
                 </div>
             </a>
@@ -76,6 +82,20 @@ socket.on('listedJobs', jobList => {
     })
 });
 
+const applyJob = (x) => {
+    const data = {
+        profile: userData._id,
+        job: x
+    }
+    socket.emit('applyJob', data);
+}
+socket.on('refresh', () => {
+    window.location.reload();
+});
+
+socket.on('jobApplied', reply => {
+    if (reply === 'y') window.location.reload();
+})
 socket.on('newJobPosted', job => {
     myUL.innerHTML += `
         <li id="gud" class="col-12 col-md-6">
@@ -106,3 +126,7 @@ document.querySelector('#log_out_btn').onclick = () => {
     sessionStorage.removeItem('technocratUserData');
     window.location.href = "./login.html";
 };
+
+document.querySelector('#hrsdbj').onclick = () => {
+    window.location.replace(`./profile.html?id=${userData._id}&type=employee`);
+}
