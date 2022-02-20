@@ -9,6 +9,7 @@ Technologies Used
   - MONGODB 
   - EXPRESSJS 
   - SOCKETIO
+  - NODEMAILER
   
 It happens many times that we look for a plumber, a mechanic or labor, etc but we are unable to find them due to either less medium of connectivity or some other reason.
 Due to this many people who are skilled in these works remain unemployed and as well as our work also got delayed. 
