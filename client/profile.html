@@ -26,12 +26,15 @@
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
-                      
+
                         <a class="logo">
-                            <h4>XYZ <span id="empName">Profile</span></h4>
+                            <h4><span id="empName">Profile</span></h4>
                         </a>
                         <ul class="nav">
-                           <li> <div class="main-blue-button"><a>Hire/ Find Job</a></div>
+                            <li>
+                                <div class="main-blue-button findjobbutton">
+                                    <a></a>
+                                </div>
                             </li>
                         </ul>
                         <a class='menu-trigger'>
@@ -43,7 +46,7 @@
         </div>
     </header>
 
-  
+
     <div class="chate mt-5 pt-5">
         <div class="container ">
             <div class="main-body1">
@@ -54,26 +57,12 @@
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                     <div class="mt-3">
-                                        <h4>Your Name</h4>
-                                        <p class="text-secondary mb-1">Your Profession</p>
-                                        <p class="text-muted font-size-sm">Chandigarh, UT, IN</p>
+                                        <h4 class="xxName">Your Name</h4>
+                                        <p id="xxProfession" class="text-secondary mb-1">Your Profession</p>
+                                        <p class="xxAddress" class="text-muted font-size-sm">Chandigarh, UT, IN</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card2 mt-2 py-2">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp mx-2 icon-inline text-success" viewBox="0 0 16 16">
-                      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-                    </svg>Whatsapp</h6>
-                                    <span class="text-secondary">abc</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-5 icon-inline text-primary" ><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
-                                    <span class="text-secondary">xyz</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -83,7 +72,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Full Name</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="col-sm-9 text-secondary xxName">
                                         XYZ
                                     </div>
                                 </div>
@@ -92,17 +81,8 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Email</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="col-sm-9 text-secondary" id="xxMail">
                                         abc@xyz.com
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        000000000000
                                     </div>
                                 </div>
                                 <hr>
@@ -110,7 +90,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Mobile</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="col-sm-9 text-secondary" id="xxNum">
                                         11111111111
                                     </div>
                                 </div>
@@ -119,8 +99,26 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Address</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="col-sm-9 text-secondary xxAddress">
                                         Chandigarh, UT, IN
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Jobs</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary" id="xxJobs">
+                                        0
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Rating</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <span id="xxRate">0</span> / 5
                                     </div>
                                 </div>
                                 <hr>
@@ -128,39 +126,12 @@
                         </div>
 
                         <div class="row gutters-sm4">
-                            <div class="col-sm-6 mb1-3">
-                                <div class="card2 h-100">
-                                    <div class="card-body4">
-                                        <h6 class="d-flex align-items-center mb1-3"><i class="material-icons text-info mr-2 pr-2" style="margin-right: 0.4em;">Ratings</i>&#9733; &#9733; &#9733; &#9733; &#9733; &#9733;</h6>
-                                        <small>1 Star</small>
-                                        <div class="progress mb1-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>2 Star</small>
-                                        <div class="progress mb1-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>3 Star</small>
-                                        <div class="progress mb1-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>4 Star</small>
-                                        <div class="progress mb1-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>5 Star</small>
-                                        <div class="progress mb1-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 mb1-3">
+                            <div class="col-12">
                                 <div class="card2 h-100">
                                     <div class="card-body4">
                                         <h6 class="d-flex align-items-center mb1-3"><i class="material-icons text-info mr-2 pr-2" style="margin-right: 0.4em;">About</i>(Description) </h6>
                                         <div id="description">
-                                            <p>
+                                            <p id="xxDesc">
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo veritatis repellendus harum deserunt sequi vel eius molestiae ea ab saepe, obcaecati consequatur quas nostrum, iusto voluptatem sunt magnam modi quasi dolor! Perferendis, veritatis. Tempora,
                                                 voluptate.
                                             </p>
@@ -168,16 +139,16 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
-</div>
-
-
-
             </div>
+
+
+
         </div>
+    </div>
 
     </div>
     </div>
@@ -197,5 +168,8 @@
             </div>
         </div>
     </footer>
-    </body>
-    </html>
+
+    <script src="./assets/js/profile.js"></script>
+</body>
+
+</html>
